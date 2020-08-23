@@ -15,7 +15,7 @@ describe('renderData function', () => {
         const pageName = 'HOME PAGE';
         const tpl = 'home';
         const calledWith = {
-            appName: "My COVID-19 Tracker",
+            appName: "COVID-19 Tracker",
             pageName,
             data,
             error: null,
