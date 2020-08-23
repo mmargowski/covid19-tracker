@@ -1,3 +1,4 @@
+html,
 body {
     margin: 0;
     padding: 0;
@@ -16,15 +17,17 @@ section {
 }
 
 .cards {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
 }
 
 .card {
     flex: 1 0 500px;
     box-sizing: border-box;
-    margin: 1rem 0.25em;
-    padding: 0.5rem 1rem 1rem;
+    margin: 0.5rem 0.5rem;
+    padding: 1rem;
     background-color: #e5e5e5;
     border-radius: 0.5rem;
 }
@@ -35,20 +38,25 @@ section {
     width: 33.33%;
     float: left;
 }
+.card h2 {
+    margin-top: 0;
+}
 .card h4 {
+    text-align: center;
     margin: 0;
+    padding: 0.5rem 0.5rem;
 }
 .card .count {
     font-weight: bold;
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.25rem 0 1rem;
     font-size: 1.25rem;
 }
 .card .new,
 .card .total {
     width: 48%;
     margin-right: 2%;
-    padding: 1rem;
+    padding: 0;
     border-radius: 0.5rem;
     border: 1px solid black;
     box-sizing: border-box;
@@ -58,21 +66,53 @@ section {
 }
 .card .total {
     color: #fff;
-    background-color: #000;
+    background-color: gray;
+}
+.card .deaths .total {
+    color: #fff;
+    background-color: black;
 }
 .card .recovered .total {
     color: #fff;
     background-color: green;
 }
 
-@media screen and (min-width: 70em) {
-    .card {
-        max-width: calc(50% - 1em);
+@media screen and (min-width: 60rem) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .cards.large {
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
-@media screen and (min-width: 110em) {
-    .card {
-        max-width: calc(25% - 1em);
+@media screen and (min-width: 100rem) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
     }
+    .cards.large {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (min-width: 140rem) {
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .cards.large {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.error {
+    font-size: 1.7em;
+    color: red;
+}
+
+/* Forms */
+
+input {
+    font-size: 1.5rem;
+    padding: 0.8rem 1rem;
+    width: 18rem;
 }

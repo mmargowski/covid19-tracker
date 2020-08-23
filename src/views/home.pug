@@ -1,97 +1,97 @@
 extends layout
 
 block content
-    .centered
-        .cards
-            .card
-                h2 Afghanistan
-                .row
-                    .cases
-                        h3 Confirmed Cases
+    if error
+        .error 
+            div There was a problem retrieving data from the API. It is important that you have stable APIs for your production projects. Using a free, public API can backfire.
+    // We are adding a Global Section using the data.Global object.
+    if data
+        .centered
+            h2 Global
+            .centered
+                .cards.large
+                    .card
                         .row
-                            .new 
-                                h4 New
-                                .count 6
-                            .total 
-                                h4 Total
-                                .count 24
-                    .deaths
-                        h3 Deaths
+                            .cases
+                                .row
+                                    .new 
+                                        h4 New Cases
+                                        .count #{data.Global.NewConfirmed}
+                                    .total 
+                                        h4 Total Cases
+                                        .count  #{data.Global.TotalConfirmed}
+                            .deaths
+                                .row
+                                    .new 
+                                        h4 New Deaths
+                                        .count  #{data.Global.NewDeaths}
+                                    .total
+                                        h4 Total Deaths
+                                        .count  #{data.Global.TotalDeaths}
+                            .recovered
+                                .row
+                                    .new 
+                                        h4 New Recovered
+                                        .count  #{data.Global.NewRecovered}
+                                    .total
+                                        h4 Total Recovered
+                                        .count  #{data.Global.TotalRecovered}
+        .centered#countryList
+            h2 By Country
+            h3 Type to Filter
+            form(onSubmit="handleSubmit(event)")
+                input#needle(placeholder="Country name", onkeyup="handleKeyup(event)")
+            // Client side JavaScript in the <script> element below is processed in your Web browser.
+            script(type="text/javascript").
+                filter = (needle) => {
+                    const cards = document.querySelectorAll('#countryList .card');
+                    cards.forEach(el => {
+                        const name = el.getAttribute('data-name').toLowerCase();
+                        const isMatched = name && name.indexOf(needle) !== -1;
+                        el.style.display = isMatched ? 'block' : 'none';
+                    });
+                }
+                handleSubmit = (e) => {
+                    e.preventDefault(); // Prevent the form from reloading the page. We're handling this with JavaScript.
+                };
+                handleKeyup = (e) => {
+                    // Filter whenever content is entered.
+                    const needle = e.target.value.toLowerCase(); // Get the filter value.
+                    filter(needle);
+                };
+            .cards
+                // Our Countries array is now at data.Countries.
+                each val, index in data.Countries
+                    .card(data-name=val.Country.toLowerCase())
+                        h2 #{val.Country}
+                        i As of #{val.Date.split('T')[0]}
                         .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
-                    .recovered
-                        h3 Recovered
-                        .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
-            .card
-                h3 United States
-                .row
-                    .cases
-                        h3 Confirmed Cases
-                        .row
-                            .new 
-                                h4 New
-                                .count 6
-                            .total 
-                                h4 Total
-                                .count 24
-                    .deaths
-                        h3 Deaths
-                        .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
-                    .recovered
-                        h3 Recovered
-                        .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
-            .card
-                h3 Germany
-                .row
-                    .cases
-                        h3 Confirmed
-                        .row
-                            .new 
-                                h4 New
-                                .count 6
-                            .total 
-                                h4 Total
-                                .count 24
-                    .deaths
-                        h3 Deaths
-                        .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
-                    .recovered
-                        h3 Recovered
-                        .row
-                            .new 
-                                h4 New
-                                .count 1
-                            .total
-                                h4 Total
-                                .count 3
+                            .cases
+                                h3 Confirmed
+                                .row
+                                    .new 
+                                        h4 New
+                                        .count #{val.NewConfirmed}
+                                    .total 
+                                        h4 Total
+                                        .count  #{val.TotalConfirmed}
+                            .deaths
+                                h3 Deaths
+                                .row
+                                    .new 
+                                        h4 New
+                                        .count  #{val.NewDeaths}
+                                    .total
+                                        h4 Total
+                                        .count  #{val.TotalDeaths}
+                            .recovered
+                                h3 Recovered
+                                .row
+                                    .new 
+                                        h4 New
+                                        .count  #{val.NewRecovered}
+                                    .total
+                                        h4 Total
+                                        .count  #{val.TotalRecovered}
     p Visit the  
-        a(href='/about') about pages
+        a(href='/about') about page
