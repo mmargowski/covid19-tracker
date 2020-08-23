@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+section {
+    padding: 1rem;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1 0 500px;
+    box-sizing: border-box;
+    margin: 1rem 0.25em;
+    padding: 0.5rem 1rem 1rem;
+    background-color: #e5e5e5;
+    border-radius: 0.5rem;
+}
+.row {
+    overflow: hidden;
+}
+.row > * {
+    width: 33.33%;
+    float: left;
+}
+.card h4 {
+    margin: 0;
+}
+.card .count {
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.25rem;
+}
+.card .new,
+.card .total {
+    width: 48%;
+    margin-right: 2%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.card .new {
+    background-color: #fff;
+}
+.card .total {
+    color: #fff;
+    background-color: #000;
+}
+.card .recovered .total {
+    color: #fff;
+    background-color: green;
+}
+
+@media screen and (min-width: 70em) {
+    .card {
+        max-width: calc(50% - 1em);
+    }
+}
+
+@media screen and (min-width: 110em) {
+    .card {
+        max-width: calc(25% - 1em);
+    }
+}
