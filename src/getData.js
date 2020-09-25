@@ -1,12 +1,13 @@
-const axios = require('axios');
+const axios = require("axios");
 
 const getData = async (apiUrl) => {
-    try {
+  try {
     const response = await axios.get(apiUrl);
     return response.data;
-    } catch (err) {
-        throw err;
-    }
-}
+  } catch (err) {
+    console.log("fucking error: ", err);
+    throw err;
+  }
+};
 
 module.exports = getData;
